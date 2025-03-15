@@ -1,10 +1,9 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useEffect, useRef, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { Socket, io } from "socket.io-client";
 import { Mic, MicOff, PhoneOff, Video, VideoOff } from "lucide-react";
 
-const URL = "http://localhost:3000";
+const URL = "https://streemeet.duckdns.org";
 
 export const Room = ({
     name,
@@ -69,6 +68,10 @@ export const Room = ({
                     roomId
                 });
             };
+            console.log(lobby);
+            console.log(remoteVideoTrack);
+            console.log(remoteAudioTrack);
+            console.log(remoteMediaStream);
         });
 
         socket.on("offer", async ({ roomId, sdp: remoteSdp }) => {
@@ -88,7 +91,7 @@ export const Room = ({
             setReceivingPc(pc);
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
             (window as any).pcr = pc;
-            pc.ontrack = (e) => {
+            pc.ontrack = () => {
                 alert("ontrack");
                 // console.error("inside ontrack");
                 // const {track, type} = e;
@@ -182,7 +185,7 @@ export const Room = ({
         });
 
         setSocket(socket);
-        
+
         // Cleanup function
         return () => {
             socket.disconnect();
@@ -245,14 +248,14 @@ export const Room = ({
         const secs = seconds % 60;
         return `${mins}:${secs.toString().padStart(2, '0')}`;
     };
-    
+
     return (
         <div className="min-h-screen bg-gray-900 text-white flex flex-col">
             {/* Header */}
             <div className="bg-gray-800/80 backdrop-blur-sm border-b border-gray-700 py-4 px-4 sm:px-6 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
                 <div className="flex items-center gap-4 w-full sm:w-auto">
                     <h1 className="text-lg sm:text-xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-                        Welcome, {name} 
+                        Welcome, {name}
                     </h1>
                     <div className="flex items-center gap-2 text-xs sm:text-sm bg-gray-700 px-2 sm:px-3 py-1 rounded-full">
                         <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
@@ -263,7 +266,7 @@ export const Room = ({
                     Room ID: {searchParams.get("roomId")}
                 </div>
             </div>
-    
+
             {/* Main Video Container */}
             <div className="flex-1 relative p-2 sm:p-6">
                 {/* Remote Video */}
@@ -277,11 +280,10 @@ export const Room = ({
                         />
                     </div>
                 </div>
-    
+
                 {/* Local Video PIP */}
-                <div className={`absolute bottom-2 sm:bottom-6 right-2 sm:right-6 ${
-                    isLocalVideoFullscreen ? 
-                        'w-full h-full inset-0' : 
+                <div className={`absolute bottom-2 sm:bottom-6 right-2 sm:right-6 ${isLocalVideoFullscreen ?
+                        'w-full h-full inset-0' :
                         'w-32 h-24 sm:w-64 sm:h-48'
                     } rounded-lg sm:rounded-xl overflow-hidden bg-gray-800 shadow-lg border border-gray-600 sm:border-2 transition-all duration-300`}>
                     <video
@@ -303,17 +305,16 @@ export const Room = ({
                     </div>
                 </div>
             </div>
-    
+
             {/* Controls */}
             <div className="bg-gray-800/80 backdrop-blur-sm border-t border-gray-700 py-3 sm:py-4">
                 <div className="flex justify-center gap-2 sm:gap-4">
                     {/* Audio Toggle */}
                     <button
-                        className={`p-2 sm:p-3 rounded-full flex items-center transition-all ${
-                            isAudioMuted ? 
-                                'bg-red-400/20 hover:bg-red-400/30' : 
+                        className={`p-2 sm:p-3 rounded-full flex items-center transition-all ${isAudioMuted ?
+                                'bg-red-400/20 hover:bg-red-400/30' :
                                 'bg-gray-700 hover:bg-gray-600'
-                        }`}
+                            }`}
                         onClick={toggleAudio}
                     >
                         {isAudioMuted ? (
@@ -333,11 +334,10 @@ export const Room = ({
 
                     {/* Video Toggle */}
                     <button
-                        className={`p-2 sm:p-3 rounded-full flex items-center transition-all ${
-                            isVideoDisabled ? 
-                                'bg-red-400/20 hover:bg-red-400/30' : 
+                        className={`p-2 sm:p-3 rounded-full flex items-center transition-all ${isVideoDisabled ?
+                                'bg-red-400/20 hover:bg-red-400/30' :
                                 'bg-gray-700 hover:bg-gray-600'
-                        }`}
+                            }`}
                         onClick={toggleVideo}
                     >
                         {isVideoDisabled ? (

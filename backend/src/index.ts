@@ -4,8 +4,21 @@ import http from "http";
 import express from 'express';
 import { Server } from 'socket.io';
 import { UserManager } from "./managers/UserManger";
+import { log } from "console";
 
 const app = express();
+
+app.get("/quote",(req,res)=>{
+  res.json({
+    msg:"Hello,How are You"
+  })
+})
+
+app.listen(3000,()=>{
+  console.log("Http Listenin on 3000");
+  
+})
+
 const server = http.createServer(http);
 
 const io = new Server(server, {
@@ -25,6 +38,6 @@ io.on('connection', (socket: Socket) => {
   })
 });
 
-server.listen(3000, () => {
-    console.log('listening on *:3000');
+server.listen(8080, () => {
+    console.log('Socket io listening on *:8080');
 });
