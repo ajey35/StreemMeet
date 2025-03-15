@@ -210,7 +210,7 @@ export const Landing = () => {
                                         className="w-full px-4 sm:px-6 py-3 sm:py-4 bg-gray-800/50 backdrop-blur border-2 border-gray-700 rounded-xl sm:rounded-2xl focus:border-purple-500 focus:ring-4 focus:ring-purple-500/20 transition-all outline-none text-base sm:text-lg peer"
                                         autoComplete="name"
                                     />
-                                    <label className="absolute left-4 sm:left-6 top-3 sm:top-4 text-gray-400 transition-all duration-300 pointer-events-none peer-focus:-translate-y-7 peer-focus:text-sm peer-focus:text-purple-400 peer-[:not(:placeholder-shown)]:-translate-y-7 peer-[:not(:placeholder-shown)]:text-sm">
+                                    <label className="absolute left-4 sm:left-4 top-3 sm:top-4 text-gray-400 transition-all duration-300 pointer-events-none peer-focus:-translate-y-10 peer-focus:text-sm peer-focus:text-purple-400 peer-[:not(:placeholder-shown)]:-translate-y-10 peer-[:not(:placeholder-shown)]:text-sm">
                                         Enter your name
                                     </label>
                                 </div>
