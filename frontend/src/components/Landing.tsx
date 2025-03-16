@@ -1,11 +1,14 @@
 import { useEffect, useRef, useState } from "react";
 import { Room } from "./Room";
-import { 
-  Mic, MicOff, Video, VideoOff, Loader2, AlertCircle, User,
-  Shield, Zap, Users, Globe2,
-  Wifi,
-  Sparkles
+import {
+    Mic, MicOff, Video, VideoOff, Loader2, AlertCircle, User,
+    Shield, Zap, Users, Globe2,
+    Wifi,
+    Sparkles,
 } from "lucide-react";
+
+
+
 
 export const Landing = () => {
     const [name, setName] = useState("");
@@ -91,15 +94,15 @@ export const Landing = () => {
                                 <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
                                     StreamMeet
                                 </span>
-                                
+
                             </h1>
                             <Sparkles className="absolute -top-4 -right-8 w-6 h-6 text-yellow-400 animate-pulse" />
                         </div>
                         <p className="text-base sm:text-lg md:text-xl text-gray-400 max-w-2xl mx-auto leading-relaxed">
-                            Experience the future of video collaboration with 
+                            Experience the future of video collaboration with
                             crystal-clear quality
                         </p>
-                        
+
                         {/* Feature badges */}
                         <div className="flex flex-wrap justify-center gap-2 sm:gap-4 text-xs sm:text-sm font-medium">
                             <div className="px-3 py-1.5 sm:px-4 sm:py-2 bg-gray-800/50 backdrop-blur rounded-full flex items-center gap-2 hover:bg-gray-700/50 transition-colors">
@@ -117,6 +120,27 @@ export const Landing = () => {
                             <div className="px-3 py-1.5 sm:px-4 sm:py-2 bg-gray-800/50 backdrop-blur rounded-full flex items-center gap-2 hover:bg-gray-700/50 transition-colors">
                                 <Globe2 className="w-3 h-3 sm:w-4 sm:h-4 text-purple-400" />
                                 <span>Global Network</span>
+                            </div>
+                            <div className="px-3 py-1.5 sm:px-4 sm:py-2  bg-gray-800/50 backdrop-blur rounded-full flex items-center gap-2 hover:bg-gray-700/50 transition-colors">
+                            <a href="https://github.com/ajey35/StreemMeet" className="flex space-x-1 justify-center">
+                                <svg
+                                    className="w-4 h-5 sm:w-4 sm:h-4 text-white mt-0.5"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="28"
+                                    height="28"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    strokeWidth="2"
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                >
+                                    <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4" />
+                                    <path d="M9 18c-4.51 2-5-2-7-2" />
+                                </svg>
+                               
+                                    <span>Feel Free to Contribute Here!</span>
+                                </a>
                             </div>
                         </div>
                     </header>
@@ -147,11 +171,11 @@ export const Landing = () => {
                                 </div>
                             ) : (
                                 <>
-                                    <video 
-                                        ref={videoRef} 
-                                        autoPlay 
-                                        playsInline 
-                                        muted 
+                                    <video
+                                        ref={videoRef}
+                                        autoPlay
+                                        playsInline
+                                        muted
                                         className="w-full h-full object-cover transform scale-x-[-1]"
                                     />
                                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
@@ -160,26 +184,24 @@ export const Landing = () => {
 
                             {/* Camera Controls */}
                             <div className="absolute bottom-3 sm:bottom-4 left-1/2 -translate-x-1/2 flex gap-2 sm:gap-3">
-                                <button 
+                                <button
                                     onClick={toggleAudio}
-                                    className={`px-3 sm:px-4 py-2 sm:py-3 rounded-xl backdrop-blur-md transition-all flex items-center gap-2 ${
-                                        audioEnabled 
-                                            ? "bg-gray-800/70 hover:bg-gray-700/70" 
+                                    className={`px-3 sm:px-4 py-2 sm:py-3 rounded-xl backdrop-blur-md transition-all flex items-center gap-2 ${audioEnabled
+                                            ? "bg-gray-800/70 hover:bg-gray-700/70"
                                             : "bg-red-500/70 hover:bg-red-600/70"
-                                    }`}
+                                        }`}
                                 >
                                     {audioEnabled ? <Mic className="w-4 h-4 sm:w-5 sm:h-5" /> : <MicOff className="w-4 h-4 sm:w-5 sm:h-5" />}
                                     <span className="text-xs sm:text-sm hidden md:inline">
                                         {audioEnabled ? "Mute" : "Unmute"}
                                     </span>
                                 </button>
-                                <button 
+                                <button
                                     onClick={toggleVideo}
-                                    className={`px-3 sm:px-4 py-2 sm:py-3 rounded-xl backdrop-blur-md transition-all flex items-center gap-2 ${
-                                        videoEnabled 
-                                            ? "bg-gray-800/70 hover:bg-gray-700/70" 
+                                    className={`px-3 sm:px-4 py-2 sm:py-3 rounded-xl backdrop-blur-md transition-all flex items-center gap-2 ${videoEnabled
+                                            ? "bg-gray-800/70 hover:bg-gray-700/70"
                                             : "bg-red-500/70 hover:bg-red-600/70"
-                                    }`}
+                                        }`}
                                 >
                                     {videoEnabled ? <Video className="w-4 h-4 sm:w-5 sm:h-5" /> : <VideoOff className="w-4 h-4 sm:w-5 sm:h-5" />}
                                     <span className="text-xs sm:text-sm hidden md:inline">
